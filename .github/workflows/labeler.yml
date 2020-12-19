@@ -2,7 +2,7 @@ name: issue-automation
 
 on:
   issues:
-   if title-contains: "3D"
+   title-contains: "3D"
     
 
 jobs:
