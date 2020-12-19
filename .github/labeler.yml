@@ -1,16 +1,2 @@
- name: 'Programare'
-description: 'Pentru Programare'
-author: 'TakingTheRisk'
-inputs:
-  repo-token:
-    description: 'The GITHUB_TOKEN secret'
-    required: true
-  configuration-path:
-    description:  'Path to the labeler.yml configuration file'
-    required: true
-runs:
-  using: 'node12'
-  main: 'lib/main.js'
-branding:
-  icon: 'activity'  
-  color: 'blue'
+critical:
+    - '(Programare|Programare)'
