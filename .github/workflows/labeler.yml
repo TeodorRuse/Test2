@@ -1,14 +1,16 @@
-name: "Issue Labeler"
+name: issue-automation
+
 on:
   issues:
-    types: [opened, edited]
+    types: [opened]
 
 jobs:
-  triage:
+  automate-issues-labels:
     runs-on: ubuntu-latest
     steps:
-    - uses: github/issue-labeler@v2.0
-      with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
-        configuration-path: .github/labeler.yml
-        enable-versioned-regex: 0
+      - name: initial labeling
+        uses: andymckay/labeler@master
+        with:
+          add-labels: "Programare, 3D"
+          ignore-if-labeled: true
+          ignore-if-assigned: false
