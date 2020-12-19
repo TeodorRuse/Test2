@@ -2,11 +2,11 @@ name: issue-automation
 
 on:
   issues:
-    types: [opened]
-    title: "3D"
+   if title-contains: "3D"
+    
 
 jobs:
-  automate-issues-labels:
+  3d-issue-label:
     runs-on: ubuntu-latest
     steps:
       - name: initial labeling
@@ -15,3 +15,4 @@ jobs:
           add-labels: "3D"
           ignore-if-labeled: true
           ignore-if-assigned: false
+    
