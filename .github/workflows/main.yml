@@ -1,0 +1,17 @@
+name: issue-label
+
+on:
+  issues:
+   if title-contains: "Programare"
+    
+
+jobs:
+  3d-issue-label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: initial labeling
+        uses: andymckay/labeler@master
+        with:
+          add-labels: "Programare"
+          ignore-if-labeled: true
+          ignore-if-assigned: false
