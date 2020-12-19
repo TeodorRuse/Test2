@@ -2,7 +2,7 @@ name: issue-label
 
 on:
   issues:
-   if title-contains: "Programare"
+   title-contains: "Programare"
     
 
 jobs:
