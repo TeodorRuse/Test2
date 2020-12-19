@@ -6,7 +6,7 @@ on:
     
 
 jobs:
-  3d-issue-label:
+  3d_issue_label:
     runs-on: ubuntu-latest
     steps:
       - name: initial labeling
