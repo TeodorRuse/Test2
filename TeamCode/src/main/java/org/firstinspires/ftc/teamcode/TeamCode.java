@@ -4,7 +4,6 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 @TeleOp(name="Simple driving", group="Tele")
-
 public class TeamCode extends OpMode {
     DcMotor leftMotor;
     DcMotor rightMotor;
