@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import static com.qualcomm.robotcore.hardware.DcMotorSimple.Direction.REVERSE;
 
 @TeleOp(name="Simple driving", group="Tele")
-public class TeamCode extends OpMode {
+public class DriveForward extends OpMode {
     DcMotor leftMotor;
     DcMotor rightMotor;
     double power = 0.5;
