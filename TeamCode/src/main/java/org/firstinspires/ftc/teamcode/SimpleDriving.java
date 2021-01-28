@@ -7,10 +7,12 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import static com.qualcomm.robotcore.hardware.DcMotorSimple.Direction.REVERSE;
 
 @TeleOp(name="Simple driving", group="Tele")
-public class DriveForward extends OpMode {
+public class SimpleDriving extends OpMode {
     DcMotor leftMotor;
     DcMotor rightMotor;
-    double power = 0.5;
+
+    double leftMotorPower;
+    double rightMotorPower;
 
     @Override
     public void init() {
@@ -22,7 +24,9 @@ public class DriveForward extends OpMode {
 
     @Override
     public void loop() {
-        leftMotor.setPower(power);
-        rightMotor.setPower(power);
+        leftMotorPower = gamepad1.left_stick_y;
+        rightMotorPower = gamepad1.right_stick_y;
+        leftMotor.setPower(leftMotorPower);
+        rightMotor.setPower(rightMotorPower);
     }
 }
