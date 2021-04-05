@@ -66,13 +66,13 @@ public class AutonomousTest extends LinearOpMode {
     static final double     WHEEL_DIAMETER_INCHES   = 3.54 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (MOTOR_TICK_COUNTS) / (WHEEL_DIAMETER_INCHES * 3.1415);
 
-    static final double     DRIVE_SPEED             = 0.8;
-    static final double     TURN_SPEED              = 0.8;
+    static final double     DRIVE_SPEED             = 0.6;
+    static final double     TURN_SPEED              = 0.6;
 
 
     static final double     HEADING_THRESHOLD       = 1 ;      // As tight as we can make it with an integer gyroo
-    static final double     P_TURN_COEFF            = 0.05;     // Larger is more responsive, but also less stable org 0.1
-    static final double     P_DRIVE_COEFF           = 0.05;     // Larger is more responsive, but also less stable org 0.15
+    static final double     P_TURN_COEFF            = 0.04;     // Larger is more responsive, but also less stable org 0.1  for TurnSpeed 0.6 is 0.05
+    static final double     P_DRIVE_COEFF           = 0.04;     // Larger is more responsive, but also less stable org 0.15 for Drive Speed 0.06 is 0.05
 
 
 
@@ -118,21 +118,13 @@ public class AutonomousTest extends LinearOpMode {
         //just try soinning in a circle to see if shit works, still dont know how angle workse
 
         gyroDrive(DRIVE_SPEED, 170, 0);
-        sleep(25);
         gyroTurn(TURN_SPEED, 90);
-        sleep(25);
         gyroDrive(DRIVE_SPEED, 110,90);
-        sleep(25);
         gyroTurn(DRIVE_SPEED, 180);
-        sleep(25);
         gyroDrive(DRIVE_SPEED, 170, 180);
-        sleep(25);
         gyroTurn(TURN_SPEED, 270);
-        sleep(25);
         gyroDrive(DRIVE_SPEED, 110,270);
-        sleep(25);
         gyroTurn(DRIVE_SPEED, 0);
-        sleep(25);
 
 
 
@@ -269,6 +261,7 @@ public class AutonomousTest extends LinearOpMode {
             driveMotorL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             driveMotorR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
+        sleep(100);
     }
 
     /**
@@ -289,6 +282,7 @@ public class AutonomousTest extends LinearOpMode {
             // Update telemetry & Allow time for other processes to run.
             telemetry.update();
         }
+        sleep(100);
     }
 
     /**
