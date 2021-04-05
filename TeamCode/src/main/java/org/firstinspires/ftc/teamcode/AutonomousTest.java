@@ -66,13 +66,13 @@ public class AutonomousTest extends LinearOpMode {
     static final double     WHEEL_DIAMETER_INCHES   = 3.54 ;     // For figuring circumference
     static final double     COUNTS_PER_INCH         = (MOTOR_TICK_COUNTS) / (WHEEL_DIAMETER_INCHES * 3.1415);
 
-    static final double     DRIVE_SPEED             = 0.4;
-    static final double     TURN_SPEED              = 0.35;
+    static final double     DRIVE_SPEED             = 0.8;
+    static final double     TURN_SPEED              = 0.8;
 
 
     static final double     HEADING_THRESHOLD       = 1 ;      // As tight as we can make it with an integer gyroo
     static final double     P_TURN_COEFF            = 0.05;     // Larger is more responsive, but also less stable org 0.1
-    static final double     P_DRIVE_COEFF           = 0.1;     // Larger is more responsive, but also less stable org 0.15
+    static final double     P_DRIVE_COEFF           = 0.05;     // Larger is more responsive, but also less stable org 0.15
 
 
 
@@ -85,11 +85,6 @@ public class AutonomousTest extends LinearOpMode {
 
         gyro = hardwareMap.get(BNO055IMU.class, "gyro");
         gyro.initialize(parameters);
-
-        if (gyro.isGyroCalibrated()){
-            telemetry.addData("Gyro has Calibrated", 0);
-            telemetry.update();
-        }
 
 
         //DRIVE TRAIN INITIALISE==========================================================
@@ -109,8 +104,6 @@ public class AutonomousTest extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        gyroTurn(TURN_SPEED, 0);
-
         waitForStart();
 
         //angle = gyro.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.XZY, AngleUnit.DEGREES);
@@ -125,13 +118,21 @@ public class AutonomousTest extends LinearOpMode {
         //just try soinning in a circle to see if shit works, still dont know how angle workse
 
         gyroDrive(DRIVE_SPEED, 170, 0);
+        sleep(25);
         gyroTurn(TURN_SPEED, 90);
-        gyroDrive(DRIVE_SPEED, 110,0);
+        sleep(25);
+        gyroDrive(DRIVE_SPEED, 110,90);
+        sleep(25);
         gyroTurn(DRIVE_SPEED, 180);
-        gyroDrive(DRIVE_SPEED, 170, 0);
+        sleep(25);
+        gyroDrive(DRIVE_SPEED, 170, 180);
+        sleep(25);
         gyroTurn(TURN_SPEED, 270);
-        gyroDrive(DRIVE_SPEED, 110,0);
-        gyroTurn(DRIVE_SPEED, 360);
+        sleep(25);
+        gyroDrive(DRIVE_SPEED, 110,270);
+        sleep(25);
+        gyroTurn(DRIVE_SPEED, 0);
+        sleep(25);
 
 
 
