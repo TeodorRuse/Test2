@@ -46,8 +46,8 @@ public class RobotFull1 extends LinearOpMode {
         right stick = forward;
         left stick = right
         cross = intake; (toggle)
-        left bumper = conveyour
-        right bumper = conveyour + shooter;
+        left bumper = conveyor
+        right bumper = conveyor + shooter;
         right arrow = shooter motor;
       need to add all buttons;
      */
@@ -74,7 +74,7 @@ public class RobotFull1 extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        //Declarare Motoare--------------------------------------------------------------------
+        //region Declarare Motoare--------------------------------------------------------------------
         driveMotorR = hardwareMap.get(DcMotor.class, "driveMotorR");
         driveMotorL = hardwareMap.get(DcMotor.class, "driveMotorL");
         intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
@@ -92,7 +92,7 @@ public class RobotFull1 extends LinearOpMode {
 
         shooterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        //STOP Declarare Motoare--------------------------------------------------------------------
+        //endregion STOP Declarare Motoare--------------------------------------------------------------------
 
         waitForStart();
         runtime.reset();
@@ -109,58 +109,33 @@ public class RobotFull1 extends LinearOpMode {
 
 
             if(gamepad1.triangle){
-                if(isWobbleOff)
-                {
-                    wobbleServo.setPosition(0.3);
-                    isWobbleOff = false;
-                    sleep(500);
-                }
-                else
-                {
-                    wobbleServo.setPosition(0.0);
-                    isWobbleOff = true;
-                    sleep(500);
-                }
+               wobbleServo.setPosition(isWobbleOff ? 0.3 : 0.0);
+               isWobbleOff = !isWobbleOff;
+               sleep(500);
             }
 
-            if(gamepad1.dpad_up)
-                wobbleMotor.setPower(0.5);
-            else if(gamepad1.dpad_down)
-                wobbleMotor.setPower(-0.5);
-            else
-                wobbleMotor.setPower(0);
+            //Wobble motor--------------------------------------------------------------------------
+            wobbleMotor.setPower(gamepad1.dpad_up ? 0.5 : gamepad1.dpad_down ? -0.5 : 0);
 
-            //Shooter motor------------------------------------------------------------------------
-            if(gamepad2.right_bumper)
-                shooterMotor.setVelocity(3600);
-            else
-                shooterMotor.setPower(0);
-            //STOP shooter motor--------------------------------------------------------------------
+            //Shooter motor-------------------------------------------------------------------------
+            shooterMotor.setVelocity(gamepad2.right_bumper ? 3600 : 0);
 
-            if(gamepad2.left_bumper)
-                conveyorMotor.setPower(1.0);
-            else if(gamepad2.square)
-                conveyorMotor.setPower(-1);
-            else
-                conveyorMotor.setPower(0);
+            //Conveyor motor------------------------------------------------------------------------
+            conveyorMotor.setPower(gamepad2.left_bumper ? 1.0 : gamepad2.square ? -1 : 0);
 
-            //Intake Motor--------------------------------------------------------------------------
-            if(gamepad2.cross) {
-                isIntakeOn = !isIntakeOn;
-                sleep(500);
-            }
+            //Intake toggle-------------------------------------------------------------------------
+            //Sau ceva de genul, mi-se pare dubioasa structura acestui script
+            sleep((isIntakeOn = gamepad2.cross != isIntakeOn) ? 500 : 0);
 
-            if(isIntakeOn)
-                intakePower = 0.9;
-            else
-                intakePower = 0;
+            //IntakePower
+            intakePower = isIntakeOn ? 0.9 : 0;
 
+
+            //Nu pot intelege de ce setai puterea in afara if/else-ului anyways?
             intakeMotor.setPower(intakePower);
 
-            if(gamepad2.circle)
-                intakeMotor.setPower(-1);
-            else
-                intakeMotor.setPower(intakePower);
+            intakeMotor.setPower(gamepad2.circle ? -1 : intakePower);
+
 
 
             /*if(gamepad2.cross || gamepad2.circle)
