@@ -33,16 +33,14 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorImplEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 
-@TeleOp(name="RobotFull1", group="Linear Opmode")
+@TeleOp(name="SovaTeleOP(1_Controller)", group="Linear Opmode")
 //@Disabled
-public class RobotFull1 extends LinearOpMode {
+public class SovaTeleOP_1_Controller extends LinearOpMode {
 
     /*
         right stick = forward;
@@ -66,13 +64,17 @@ public class RobotFull1 extends LinearOpMode {
 
     private boolean isIntakeOn = false;
     private double dirveMotorSpeedBasic = 0.85;
-    private boolean isWobbleOn = false;
+    private boolean isWobbleOff = false;
+    double powerDriveR;
+    double powerDriveL;
+    double intakePower;
 
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
+        //Declare Motors----------------------------------------------------------------------------
         driveMotorR = hardwareMap.get(DcMotor.class, "driveMotorR");
         driveMotorL = hardwareMap.get(DcMotor.class, "driveMotorL");
         intakeMotor = hardwareMap.get(DcMotor.class, "intakeMotor");
@@ -81,6 +83,7 @@ public class RobotFull1 extends LinearOpMode {
         wobbleMotor = hardwareMap.get(DcMotor.class, "wobbleMotor");
         wobbleServo = hardwareMap.get(Servo.class, "wobbleServo");
 
+        //Declare Directions and encoders-----------------------------------------------------------
         driveMotorR.setDirection(DcMotor.Direction.FORWARD);
         driveMotorL.setDirection(DcMotor.Direction.REVERSE);
         intakeMotor.setDirection(DcMotor.Direction.FORWARD);
@@ -90,43 +93,38 @@ public class RobotFull1 extends LinearOpMode {
 
         shooterMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        // Wait for the game to start (driver presses PLAY)
+        //Wait for Start----------------------------------------------------------------------------
         waitForStart();
         runtime.reset();
 
-        // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
 
-            // Setup a variable for each drive wheel to save power level for telemetry
-            double powerDriveR;
-            double powerDriveL;
-            double intakePower;
-
+            //Drive Train---------------------------------------------------------------------------
             double drive = gamepad1.left_stick_y;
             double turn  =  -gamepad1.right_stick_x;
             powerDriveR    = Range.clip(drive + turn, -dirveMotorSpeedBasic, dirveMotorSpeedBasic) ;
             powerDriveL   = Range.clip(drive - turn, -dirveMotorSpeedBasic, dirveMotorSpeedBasic) ;
 
-            /*
-            powerDriveR = -gamepad1.right_stick_y % 0.6;
-            powerDriveL = -gamepad1.left_stick_y % 0.6;
-             */
+            driveMotorR.setPower(powerDriveR);
+            driveMotorL.setPower(powerDriveL);
 
+            //Wobble Servo--------------------------------------------------------------------------
             if(gamepad1.triangle){
-                if(isWobbleOn)
+                if(isWobbleOff)
                 {
                     wobbleServo.setPosition(0.3);
-                    isWobbleOn = false;
+                    isWobbleOff = false;
                     sleep(500);
                 }
                 else
                 {
                     wobbleServo.setPosition(0.0);
-                    isWobbleOn = true;
+                    isWobbleOff = true;
                     sleep(500);
                 }
             }
 
+            //Wobble Motor--------------------------------------------------------------------------
             if(gamepad1.dpad_up)
                 wobbleMotor.setPower(0.5);
             else if(gamepad1.dpad_down)
@@ -134,31 +132,22 @@ public class RobotFull1 extends LinearOpMode {
             else
                 wobbleMotor.setPower(0);
 
-            if(gamepad2.right_bumper)
-            {
-                shooterMotor.setVelocity(5713);
-                //conveyorMotor.setPower(1);
-            }
+            //Shooter motor------------------------------------------------------------------------
+            if(gamepad1.right_bumper)
+                shooterMotor.setVelocity(1820);
             else
-            {
                 shooterMotor.setPower(0);
-                //conveyorMotor.setPower(0);
-            }
 
-            if(gamepad2.left_bumper)
+            //Conveyor Motor------------------------------------------------------------------------
+            if(gamepad1.left_bumper)
                 conveyorMotor.setPower(1.0);
             else if(gamepad2.square)
                 conveyorMotor.setPower(-1);
             else
                 conveyorMotor.setPower(0);
 
-            /*if(gamepad1.dpad_right)
-                shooterMotor.setPower(1);
-            else
-                shooterMotor.setPower(0);
-             */
-
-            if(gamepad2.cross) {
+            //Intake Motor--------------------------------------------------------------------------
+            if(gamepad1.cross) {
                 isIntakeOn = !isIntakeOn;
                 sleep(500);
             }
@@ -168,23 +157,16 @@ public class RobotFull1 extends LinearOpMode {
             else
                 intakePower = 0;
 
-
-
-            // Send calculated power to wheels
-            driveMotorR.setPower(powerDriveR);
-            driveMotorL.setPower(powerDriveL);
-
-
             intakeMotor.setPower(intakePower);
 
-            if(gamepad2.circle)
+            if(gamepad1.circle)
                 intakeMotor.setPower(-1);
             else
                 intakeMotor.setPower(intakePower);
+            //END Intake Motor----------------------------------------------------------------------
+
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
-            telemetry.addData("ServoPosition = ", wobbleServo.getPosition());
-
             telemetry.update();
         }
     }
