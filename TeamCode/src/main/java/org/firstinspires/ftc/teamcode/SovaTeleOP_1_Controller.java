@@ -168,6 +168,8 @@ public class SovaTeleOP_1_Controller extends LinearOpMode {
 
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
+            telemetry.addData("ServoPosition = ", wobbleServo.getPosition());
+
             telemetry.update();
         }
     }
