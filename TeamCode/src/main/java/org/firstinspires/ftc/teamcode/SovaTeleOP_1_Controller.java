@@ -29,6 +29,7 @@
 
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -39,7 +40,7 @@ import com.qualcomm.robotcore.util.Range;
 
 
 @TeleOp(name="SovaTeleOP(1_Controller)", group="Linear Opmode")
-//@Disabled
+@Disabled
 public class SovaTeleOP_1_Controller extends LinearOpMode {
 
     /*

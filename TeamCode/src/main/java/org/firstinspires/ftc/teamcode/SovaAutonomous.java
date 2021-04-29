@@ -155,52 +155,37 @@ public class SovaAutonomous extends LinearOpMode {
 
         waitForStart();
 
-        if(visionPipeline.ring4 == 0) {
+        /*if(visionPipeline.ring4 == 0) {
             wobbleServo.setPosition(0.3);
-            gyroTurn(TURN_SPEED, 339);
-            gyroDrive(DRIVE_SPEED, 103, 339);
-            gyroTurn(TURN_SPEED, 43);
-            gyroDrive(DRIVE_SPEED, 60, 43);
-            gyroTurn(TURN_SPEED, 357);
-            //gyroDrive(DRIVE_SPEED, 7, 357);
-            gyroTurn(TURN_SPEED, 359);
-            shoot(4);
-            intake(4);
-            shoot(4);
-            gyroDrive(DRIVE_SPEED, 62, 359);
-            releaseWobble(true);
+        gyroTurn(TURN_SPEED, 349);
+        gyroDrive(DRIVE_SPEED, 103, 349);
+        gyroTurn(TURN_SPEED, 29);
+        gyroDrive(DRIVE_SPEED, 44, 29);
+        gyroTurn(TURN_SPEED, 0);
+        gyroDrive(DRIVE_SPEED, 2, 0);
+        shoot(4);
+        gyroTurn(TURN_SPEED, 348);
+        gyroDrive(DRIVE_SPEED, 120, 348);
+        releaseWobble(true);
+        gyroTurn(TURN_SPEED, 164);
+        gyroDrive(DRIVE_SPEED, 120m, 164);
+
         }
         else if(visionPipeline.ring1 == 0) {
-            /*wobbleServo.setPosition(0.3);
-            gyroTurn(TURN_SPEED, 340);
-            gyroDrive(DRIVE_SPEED, 101, 340);
-            gyroTurn(TURN_SPEED, 36);
-            gyroDrive(DRIVE_SPEED, 59, 36);
-            gyroTurn(TURN_SPEED, 0);
-            //gyroDrive(DRIVE_SPEED, 6, 0);
-            shoot(4);
-            intake(1);
-            shoot(1);
-            //gyroTurn(TURN_SPEED, 22);
-            //gyroDrive(DRIVE_SPEED, 48, 22);
-            gyroDrive(DRIVE_SPEED, 48, 0);
-            releaseWobble(true);*/
-
-            wobbleServo.setPosition(0.3);
-            gyroTurn(TURN_SPEED, 339);
-            gyroDrive(DRIVE_SPEED, 103, 339);
-            gyroTurn(TURN_SPEED, 43);
-            gyroDrive(DRIVE_SPEED, 60   , 43);
-            gyroTurn(TURN_SPEED, 357);
-            //gyroDrive(DRIVE_SPEED, 0, 357);
-            gyroTurn(TURN_SPEED, 359);
-            shoot(4);
-            intake(1);
-            shoot(1);
-            gyroDrive(DRIVE_SPEED, 62, 359);
-            releaseWobble(true);
-
-
+           wobbleServo.setPosition(0.3);
+        gyroTurn(TURN_SPEED, 346);
+        gyroDrive(DRIVE_SPEED, 104, 346);
+        gyroTurn(TURN_SPEED, 38);
+        gyroDrive(DRIVE_SPEED, 55, 38);
+        gyroTurn(TURN_SPEED, 0);
+        gyroDrive(DRIVE_SPEED, 6, 0);
+        gyroTurn(TURN_SPEED, 0);
+        gyroDrive(DRIVE_SPEED, -23, 0);
+        shoot(4);
+        gyroTurn(TURN_SPEED, 10);
+        gyroDrive(DRIVE_SPEED, 74, 10);
+        releaseWobble(true);
+        gyroDrive(DRIVE_SPEED, -15, 10);
         }
         else
         {
@@ -217,7 +202,23 @@ public class SovaAutonomous extends LinearOpMode {
             gyroTurn(TURN_SPEED, 332);
             gyroDrive(DRIVE_SPEED, 101, 332);
             releaseWobble(true);
-        }
+
+        /*wobbleServo.setPosition(0.3);
+        gyroTurn(TURN_SPEED, 0);
+        gyroDrive(DRIVE_SPEED, 144, 0);
+        shoot(4);
+        gyroTurn(TURN_SPEED, 325);
+        gyroDrive(DRIVE_SPEED, 29, 325);
+        releaseWobble(true);
+        gyroTurn(TURN_SPEED, 154);
+        gyroDrive(DRIVE_SPEED, 116, 154);
+        releaseWobble(false);
+        gyroTurn(TURN_SPEED, 339);
+        gyroDrive(DRIVE_SPEED, 113, 339);
+        releaseWobble(true);
+
+    }*/
+
 
         while(opModeIsActive()) {
             telemetry.addData("Ring 1:", visionPipeline.ring1); // Will return 0 if there is 1 ring, otherwise 1
