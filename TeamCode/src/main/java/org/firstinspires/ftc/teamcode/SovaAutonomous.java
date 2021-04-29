@@ -155,7 +155,7 @@ public class SovaAutonomous extends LinearOpMode {
 
         waitForStart();
 
-        /*if(visionPipeline.ring4 == 0) {
+        if(visionPipeline.ring4 == 0) { 
             wobbleServo.setPosition(0.3);
         gyroTurn(TURN_SPEED, 349);
         gyroDrive(DRIVE_SPEED, 103, 349);
@@ -168,7 +168,7 @@ public class SovaAutonomous extends LinearOpMode {
         gyroDrive(DRIVE_SPEED, 120, 348);
         releaseWobble(true);
         gyroTurn(TURN_SPEED, 164);
-        gyroDrive(DRIVE_SPEED, 120m, 164);
+        gyroDrive(DRIVE_SPEED, 120, 164);
 
         }
         else if(visionPipeline.ring1 == 0) {
@@ -189,7 +189,7 @@ public class SovaAutonomous extends LinearOpMode {
         }
         else
         {
-            wobbleServo.setPosition(0.3);
+            /*wobbleServo.setPosition(0.3);
             gyroTurn(TURN_SPEED, 2);
             gyroDrive(DRIVE_SPEED, 127, 2);
             shoot(4);
@@ -201,9 +201,9 @@ public class SovaAutonomous extends LinearOpMode {
             releaseWobble(false);
             gyroTurn(TURN_SPEED, 332);
             gyroDrive(DRIVE_SPEED, 101, 332);
-            releaseWobble(true);
+            releaseWobble(true);*/
 
-        /*wobbleServo.setPosition(0.3);
+        wobbleServo.setPosition(0.3);
         gyroTurn(TURN_SPEED, 0);
         gyroDrive(DRIVE_SPEED, 144, 0);
         shoot(4);
@@ -217,16 +217,16 @@ public class SovaAutonomous extends LinearOpMode {
         gyroDrive(DRIVE_SPEED, 113, 339);
         releaseWobble(true);
 
-    }*/
+    }
 
 
-        while(opModeIsActive()) {
+        /*while(opModeIsActive()) {
             telemetry.addData("Ring 1:", visionPipeline.ring1); // Will return 0 if there is 1 ring, otherwise 1
             telemetry.addData("Ring 4:", visionPipeline.ring4); // Will return 0 if there is 4 rings, otherwise 1
             telemetry.addData("Status", "Run Time: " + runtime.toString());
 
             telemetry.update();
-        }
+        }*/
     }
 
     public void shoot(int rings)
