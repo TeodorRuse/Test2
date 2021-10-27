@@ -84,7 +84,7 @@ public class SovaAutonomous extends LinearOpMode {
     // DRIVE TRAIN INITIALISATION------------------------------------------------------------------------------
     static final int        MOTOR_TICK_COUNTS = 560; //28 baseTick * 20 gearReduction (4*5);
     static final double     WHEEL_DIAMETER_INCHES   = 3.54 ;     // For figuring circumference
-    static final double     COUNTS_PER_INCH         = (MOTOR_TICK_COUNTS) / (WHEEL_DIAMETER_INCHES * 3.1415);
+    static final double     COUNTS_PER_INCH         = (MOTOR_TICK_COUNTS) / (WHEEL_DIAMETER_INCHES * 3.1415); //
 
     static final double     DRIVE_SPEED             =  0.8; //0.8;
     static final double     TURN_SPEED              = 0.7; //0.9;
@@ -140,7 +140,7 @@ public class SovaAutonomous extends LinearOpMode {
         wobbleMotor.setDirection(DcMotor.Direction.FORWARD);
 
         driveMotorL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        driveMotorL.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        driveMotorR.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         shooterMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         driveMotorL.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
@@ -169,6 +169,7 @@ public class SovaAutonomous extends LinearOpMode {
         releaseWobble(true);
         gyroTurn(TURN_SPEED, 164);
         gyroDrive(DRIVE_SPEED, 120, 164);
+
 
         }
         else if(visionPipeline.ring1 == 0) {
