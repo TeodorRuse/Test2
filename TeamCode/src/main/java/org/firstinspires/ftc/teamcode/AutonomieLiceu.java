@@ -52,9 +52,9 @@ import com.qualcomm.robotcore.util.Range;
  */
 
 
-@TeleOp(name="AutoTest", group="Linear Opmode")
+@TeleOp(name="AutonomieLiceu", group="Linear Opmode")
 //@Disabled
-public class AutonomousTest extends LinearOpMode {
+public class AutonomieLiceu extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
